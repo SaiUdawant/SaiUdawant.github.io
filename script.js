@@ -261,7 +261,7 @@ document.getElementById('contact-form').addEventListener('submit', function(even
     };
 
     // Send the email using EmailJS
-    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+    emailjs.send('service_zzz5r4r', 'template_vlwj6ue', templateParams)
         .then(function() {
             // Show success message
             document.getElementById('success-message').style.display = 'block';
