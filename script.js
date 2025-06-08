@@ -57,10 +57,7 @@ VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
 // Typing Animation
 const typed = new Typed('.typed-text', {
     strings: [
-        'IoT Developer',
-        'Full Stack Engineer',
-        'Problem Solver',
-        'Tech Enthusiast'
+        'AIML ENGINEER'
     ],
     typeSpeed: 50,
     backSpeed: 30,
