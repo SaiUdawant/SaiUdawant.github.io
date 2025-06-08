@@ -375,12 +375,13 @@ body {
 
 /* Footer */
 footer {
-    background: var(--card-bg);
+    background: var(--bg-color);
     color: var(--text-color);
     padding: 2rem;
-    border-top: 1px solid var(--primary-color);
+    border-top: 2px solid var(--primary-color);
     position: relative;
     z-index: 10;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .footer-content {
@@ -389,7 +390,9 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
 }
 
 .footer-links {
@@ -401,7 +404,9 @@ footer {
     color: var(--text-color);
     text-decoration: none;
     transition: var(--transition);
-    font-weight: 500;
+    font-weight: 600;
+    position: relative;
+    padding: 0.5rem 0;
 }
 
 .footer-links a:hover {
@@ -409,9 +414,10 @@ footer {
 }
 
 [data-theme="dark"] footer {
-    background: var(--card-bg);
+    background: var(--bg-color);
     color: var(--text-color);
-    border-top: 1px solid var(--accent-color);
+    border-top: 2px solid var(--accent-color);
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="dark"] .footer-links a {
