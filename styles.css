@@ -11,6 +11,7 @@
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --gradient: linear-gradient(135deg, var(--primary-color), #8A84FF);
     --transition: all 0.3s ease;
+    --cursor-color: var(--primary-color);
 }
 
 /* Dark theme colors */
@@ -23,6 +24,7 @@
     --card-bg: #1E1E1E;
     --nav-bg: rgba(18, 18, 18, 0.95);
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --cursor-color: var(--accent-color);
 }
 
 * {
@@ -45,15 +47,7 @@ body {
 
 /* Custom Cursor */
 .cursor {
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--primary-color);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: difference;
-    transition: transform 0.2s ease;
+    display: none !important;
 }
 
 /* Navigation */
@@ -671,33 +665,6 @@ footer {
     box-shadow: 0 0 10px var(--primary-color);
 }
 
-/* Remove cursor dot only */
-.cursor-dot,
-.cursor-dot-outline {
-    display: none;
-    pointer-events: none;
-}
-
-/* Custom cursor styles for links and interactive elements */
-a, 
-button,
-.btn,
-.nav-link,
-.social-link {
-    cursor: pointer;
-}
-
-a:hover, 
-button:hover,
-.btn:hover,
-.nav-link:hover,
-.social-link:hover {
-    cursor: pointer;
-    /* Add a subtle transition for smooth color change */
-    transition: color 0.3s ease;
-    color: var(--primary-color);
-}
-
 /* Interactive elements hover effects */
 a, 
 .nav-link,
@@ -709,35 +676,20 @@ button {
     position: relative;
 }
 
-/* Hover effect for navigation links */
-.nav-link:hover {
+/* Hover effects */
+.nav-link:hover,
+.social-icon:hover {
     color: var(--primary-color);
     transform: translateY(-2px);
 }
 
-/* Hover effect for buttons */
 .btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Hover effect for social icons */
-.social-icon:hover {
-    color: var(--primary-color);
-    transform: translateY(-3px);
-}
-
-/* General link hover effect */
 a:not(.btn):not(.nav-link):not(.social-icon):hover {
     color: var(--primary-color);
-    text-decoration: none;
-}
-
-/* Remove cursor dot */
-.cursor-dot,
-.cursor-dot-outline {
-    display: none;
-    pointer-events: none;
 }
 
 .btn {
@@ -773,4 +725,53 @@ a:not(.btn):not(.nav-link):not(.social-icon):hover {
     background: var(--primary-color);
     color: white;
     transform: translateY(-3px);
+}
+
+/* Custom cursor styles */
+a, button, .nav-link, .work-card, .social-link, .theme-switch, .btn {
+    cursor: pointer;
+}
+
+a:hover, button:hover, .nav-link:hover, .work-card:hover, 
+.social-link:hover, .theme-switch:hover, .btn:hover {
+    cursor: pointer;
+}
+
+/* Add custom cursor styles using CSS variables */
+:root {
+    cursor: auto;
+}
+
+a, button, .nav-link, .work-card, .social-link, .theme-switch, .btn {
+    position: relative;
+}
+
+a:hover::after, button:hover::after, .nav-link:hover::after, 
+.work-card:hover::after, .social-link:hover::after, 
+.theme-switch:hover::after, .btn:hover::after {
+    content: '';
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--cursor-color);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    animation: cursorPulse 1s infinite;
+}
+
+@keyframes cursorPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
 } 
