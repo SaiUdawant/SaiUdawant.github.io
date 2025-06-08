@@ -160,10 +160,10 @@ document.getElementById('contact-form').addEventListener('submit', function(even
 
     // Get the form data
     const templateParams = {
-        from_name: document.getElementById('from_name').value,
-        reply_to: document.getElementById('from_email').value,
+        name: document.getElementById('from_name').value,
+        time: new Date().toLocaleString(),
         message: document.getElementById('message').value,
-        to_name: 'Sai Udawant'
+        email: document.getElementById('from_email').value
     };
 
     console.log('Attempting to send email with params:', templateParams);
