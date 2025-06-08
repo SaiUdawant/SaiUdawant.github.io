@@ -776,8 +776,17 @@ a:not(.btn):not(.nav-link):not(.social-icon):hover {
     color: var(--primary-color);
 }
 
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
 .btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     padding: 12px 24px;
     border-radius: 30px;
     text-decoration: none;
@@ -785,6 +794,15 @@ a:not(.btn):not(.nav-link):not(.social-icon):hover {
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
+}
+
+.btn i {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.btn:hover i {
+    transform: translateY(-2px);
 }
 
 .btn.primary {
@@ -799,6 +817,12 @@ a:not(.btn):not(.nav-link):not(.social-icon):hover {
     border: 2px solid var(--primary-color);
 }
 
+.btn.outline {
+    background: transparent;
+    color: var(--text-color);
+    border: 2px solid var(--text-color);
+}
+
 .btn.primary:hover {
     background: var(--primary-color);
     transform: translateY(-3px);
@@ -808,6 +832,12 @@ a:not(.btn):not(.nav-link):not(.social-icon):hover {
 .btn.secondary:hover {
     background: var(--primary-color);
     color: white;
+    transform: translateY(-3px);
+}
+
+.btn.outline:hover {
+    background: var(--text-color);
+    color: var(--bg-color);
     transform: translateY(-3px);
 }
 
