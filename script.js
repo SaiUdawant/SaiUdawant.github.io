@@ -1,3 +1,8 @@
+// Initialize EmailJS
+(function() {
+    emailjs.init("XlLRzHIK9Uww0lIoF");
+})();
+
 // Theme switching functionality
 const themeToggle = document.getElementById('theme-toggle');
 const htmlElement = document.documentElement;
@@ -139,11 +144,6 @@ document.querySelectorAll('.work-card, .skill-category, .timeline-item').forEach
     observer.observe(el);
 });
 
-// Initialize EmailJS
-(function() {
-    emailjs.init("XlLRzHIK9Uww0lIoF");
-})();
-
 // Contact Form Handling
 document.getElementById('contact-form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -160,14 +160,17 @@ document.getElementById('contact-form').addEventListener('submit', function(even
 
     // Get the form data
     const templateParams = {
+        to_name: 'Sai Udawant',
         from_name: document.getElementById('from_name').value,
         from_email: document.getElementById('from_email').value,
         message: document.getElementById('message').value,
-        to_name: 'Sai Udawant'
+        reply_to: document.getElementById('from_email').value
     };
 
+    console.log('Attempting to send email with params:', templateParams);
+
     // Send the email using EmailJS
-    emailjs.send('service_zzz5r4r', 'template_vlwj6ue', templateParams)
+    emailjs.sendForm('service_zzz5r4r', 'template_vlwj6ue', event.target)
         .then(function(response) {
             console.log('SUCCESS!', response.status, response.text);
             // Show success message
@@ -175,9 +178,11 @@ document.getElementById('contact-form').addEventListener('submit', function(even
             // Reset the form
             document.getElementById('contact-form').reset();
         }, function(error) {
-            console.log('FAILED...', error);
-            // Show error message
-            document.getElementById('error-message').style.display = 'block';
+            console.error('FAILED...', error);
+            // Show error message with details
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = 'Failed to send message: ' + (error.text || 'Please try again.');
+            errorMessage.style.display = 'block';
         })
         .finally(function() {
             // Reset button state
