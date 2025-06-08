@@ -160,8 +160,8 @@ document.getElementById('contact-form').addEventListener('submit', function(even
 
     // Get the form data
     const templateParams = {
-        name: document.getElementById('from_name').value,
-        email: document.getElementById('from_email').value,
+        from_name: document.getElementById('from_name').value,
+        from_email: document.getElementById('from_email').value,
         message: document.getElementById('message').value
     };
 
@@ -170,7 +170,7 @@ document.getElementById('contact-form').addEventListener('submit', function(even
     // Send the email using EmailJS
     emailjs.send(
         'service_zzz5r4r',
-        'template_vlwj6ue',
+        'template_lib4c04',
         templateParams
     )
     .then(function(response) {
