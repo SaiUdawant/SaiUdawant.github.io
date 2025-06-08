@@ -139,44 +139,52 @@ document.querySelectorAll('.work-card, .skill-category, .timeline-item').forEach
     observer.observe(el);
 });
 
-// Form handling with validation
-const contactForm = document.querySelector('.contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        // Basic form validation
-        const name = contactForm.querySelector('#name').value;
-        const email = contactForm.querySelector('#email').value;
-        const message = contactForm.querySelector('#message').value;
-        
-        if (!name || !email || !message) {
-            alert('Please fill in all fields');
-            return;
-        }
-        
-        if (!isValidEmail(email)) {
-            alert('Please enter a valid email address');
-            return;
-        }
-        
-        // Here you would typically send the form data to your server
-        try {
-            // Simulate form submission
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            alert('Thank you for your message! I will get back to you soon.');
-            contactForm.reset();
-        } catch (error) {
-            alert('There was an error sending your message. Please try again.');
-        }
-    });
-}
+// Initialize EmailJS
+(function() {
+    emailjs.init("XlLRzHIK9Uww0lIoF");
+})();
 
-// Email validation helper
-function isValidEmail(email) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-}
+// Contact Form Handling
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    // Show loading state
+    const submitButton = this.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.textContent;
+    submitButton.textContent = 'Sending...';
+    submitButton.disabled = true;
+
+    // Hide any existing messages
+    document.getElementById('success-message').style.display = 'none';
+    document.getElementById('error-message').style.display = 'none';
+
+    // Get the form data
+    const templateParams = {
+        from_name: document.getElementById('from_name').value,
+        from_email: document.getElementById('from_email').value,
+        message: document.getElementById('message').value,
+        to_name: 'Sai Udawant'
+    };
+
+    // Send the email using EmailJS
+    emailjs.send('service_zzz5r4r', 'template_vlwj6ue', templateParams)
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            // Show success message
+            document.getElementById('success-message').style.display = 'block';
+            // Reset the form
+            document.getElementById('contact-form').reset();
+        }, function(error) {
+            console.log('FAILED...', error);
+            // Show error message
+            document.getElementById('error-message').style.display = 'block';
+        })
+        .finally(function() {
+            // Reset button state
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+        });
+});
 
 // Parallax effect for shapes
 document.addEventListener('mousemove', (e) => {
@@ -231,50 +239,4 @@ document.addEventListener('DOMContentLoaded', function() {
             menuToggle.classList.remove('active');
         });
     });
-});
-
-// Contact Form Handling
-document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    // Get the form elements
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-    
-    // Show loading state
-    const submitButton = this.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton.textContent;
-    submitButton.textContent = 'Sending...';
-    submitButton.disabled = true;
-
-    // Hide any existing messages
-    document.getElementById('success-message').style.display = 'none';
-    document.getElementById('error-message').style.display = 'none';
-
-    // Prepare the email parameters
-    const templateParams = {
-        from_name: name,
-        from_email: email,
-        message: message,
-        to_name: 'Sai Udawant'
-    };
-
-    // Send the email using EmailJS
-    emailjs.send('service_zzz5r4r', 'template_vlwj6ue', templateParams)
-        .then(function() {
-            // Show success message
-            document.getElementById('success-message').style.display = 'block';
-            // Reset the form
-            document.getElementById('contact-form').reset();
-        }, function(error) {
-            // Show error message
-            document.getElementById('error-message').style.display = 'block';
-            console.error('Failed to send message:', error);
-        })
-        .finally(function() {
-            // Reset button state
-            submitButton.textContent = originalButtonText;
-            submitButton.disabled = false;
-        });
 }); 
