@@ -858,4 +858,39 @@ a:hover::after, button:hover::after, .nav-link:hover::after,
         transform: translate(-50%, -50%) scale(1);
         opacity: 1;
     }
+}
+
+/* Contact Form Messages */
+.success-message,
+.error-message {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.success-message {
+    background-color: rgba(75, 181, 67, 0.1);
+    color: #4BB543;
+    border: 1px solid #4BB543;
+}
+
+.error-message {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: #ff0000;
+    border: 1px solid #ff0000;
+}
+
+[data-theme="dark"] .success-message {
+    background-color: rgba(75, 181, 67, 0.2);
+    color: #7ed47b;
+    border-color: #7ed47b;
+}
+
+[data-theme="dark"] .error-message {
+    background-color: rgba(255, 0, 0, 0.2);
+    color: #ff6b6b;
+    border-color: #ff6b6b;
 } 

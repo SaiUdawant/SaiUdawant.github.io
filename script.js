@@ -21,20 +21,6 @@ themeToggle.addEventListener('change', function() {
     localStorage.setItem('theme', newTheme);
 });
 
-// Custom cursor
-const cursor = document.querySelector(".cursor-dot");
-const cursorOutline = document.querySelector(".cursor-dot-outline");
-
-// Cursor hover effect
-document.querySelectorAll('a, button').forEach(link => {
-    link.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'scale(1.5)';
-    });
-    link.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'scale(1)';
-    });
-});
-
 // Typing animation
 const words = ['AI solutions.', 'ML models.', 'IoT projects.', 'innovative tech.'];
 let wordIndex = 0;
@@ -205,4 +191,90 @@ document.addEventListener('mousemove', (e) => {
         
         shape.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
     });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Theme switcher
+    const themeToggle = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    themeToggle.checked = currentTheme === 'dark';
+
+    themeToggle.addEventListener('change', function() {
+        if (this.checked) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+        }
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+            // Close mobile menu if open
+            navLinks.classList.remove('active');
+            menuToggle.classList.remove('active');
+        });
+    });
+});
+
+// Contact Form Handling
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    // Get the form elements
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    
+    // Show loading state
+    const submitButton = this.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.textContent;
+    submitButton.textContent = 'Sending...';
+    submitButton.disabled = true;
+
+    // Hide any existing messages
+    document.getElementById('success-message').style.display = 'none';
+    document.getElementById('error-message').style.display = 'none';
+
+    // Prepare the email parameters
+    const templateParams = {
+        from_name: name,
+        from_email: email,
+        message: message,
+        to_name: 'Sai Udawant'
+    };
+
+    // Send the email using EmailJS
+    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+        .then(function() {
+            // Show success message
+            document.getElementById('success-message').style.display = 'block';
+            // Reset the form
+            document.getElementById('contact-form').reset();
+        }, function(error) {
+            // Show error message
+            document.getElementById('error-message').style.display = 'block';
+            console.error('Failed to send message:', error);
+        })
+        .finally(function() {
+            // Reset button state
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+        });
 }); 
