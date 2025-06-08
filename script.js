@@ -3,20 +3,103 @@
     emailjs.init("XlLRzHIK9Uww0lIoF");
 })();
 
+// Particles.js Configuration
+particlesJS("particles-js", {
+    particles: {
+        number: {
+            value: 80,
+            density: {
+                enable: true,
+                value_area: 800
+            }
+        },
+        color: {
+            value: "#6366f1"
+        },
+        shape: {
+            type: "circle"
+        },
+        opacity: {
+            value: 0.5,
+            random: false
+        },
+        size: {
+            value: 3,
+            random: true
+        },
+        line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#6366f1",
+            opacity: 0.4,
+            width: 1
+        },
+        move: {
+            enable: true,
+            speed: 2,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false
+        }
+    },
+    interactivity: {
+        detect_on: "canvas",
+        events: {
+            onhover: {
+                enable: true,
+                mode: "grab"
+            },
+            onclick: {
+                enable: true,
+                mode: "push"
+            },
+            resize: true
+        },
+        modes: {
+            grab: {
+                distance: 140,
+                line_linked: {
+                    opacity: 1
+                }
+            },
+            push: {
+                particles_nb: 4
+            }
+        }
+    },
+    retina_detect: true
+});
+
+// Typing Animation
+const typed = new Typed('.typed-text', {
+    strings: [
+        'IoT Developer',
+        'Full Stack Engineer',
+        'Problem Solver',
+        'Tech Enthusiast'
+    ],
+    typeSpeed: 50,
+    backSpeed: 30,
+    backDelay: 2000,
+    loop: true
+});
+
 // Theme Toggle
-const themeToggle = document.getElementById('theme-toggle');
+const themeSwitch = document.getElementById('theme-switch');
 const body = document.body;
 
 // Check for saved theme preference
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme === 'dark') {
     body.classList.add('dark-theme');
-    themeToggle.checked = true;
+    themeSwitch.checked = true;
 }
 
 // Theme toggle handler
-themeToggle.addEventListener('change', () => {
-    if (themeToggle.checked) {
+themeSwitch.addEventListener('change', () => {
+    if (themeSwitch.checked) {
         body.classList.add('dark-theme');
         localStorage.setItem('theme', 'dark');
     } else {
@@ -35,15 +118,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 behavior: 'smooth',
                 block: 'start'
             });
+            // Update active link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            this.classList.add('active');
         }
     });
 });
 
-// Active navigation link highlight
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('.nav-links a');
-
+// Update active navigation link on scroll
 window.addEventListener('scroll', () => {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
     let current = '';
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
@@ -55,75 +143,36 @@ window.addEventListener('scroll', () => {
 
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href').slice(1) === current) {
+        if (link.getAttribute('href') === `#${current}`) {
             link.classList.add('active');
         }
     });
 });
 
-// Contact Form Handling
+// Contact Form
 const contactForm = document.getElementById('contact-form');
-
 contactForm.addEventListener('submit', function(e) {
     e.preventDefault();
-
-    const formData = {
-        name: this.name.value,
-        email: this.email.value,
-        message: this.message.value,
-        time: new Date().toLocaleString()
-    };
-
-    emailjs.send('service_zzz5r4r', 'template_lib4c04', formData)
-        .then(function(response) {
-            alert('Message sent successfully!');
-            contactForm.reset();
-        }, function(error) {
-            alert('Failed to send message. Please try again.');
-            console.error('EmailJS error:', error);
-        });
-});
-
-// Typing animation
-const words = ['AI solutions.', 'ML models.', 'IoT projects.', 'innovative tech.'];
-let wordIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-const typingSpeed = 100;
-const deletingSpeed = 50;
-const pauseEnd = 1500;
-
-function typeEffect() {
-    const current = words[wordIndex];
-    const dynamicText = document.querySelector('.dynamic-text');
     
-    if (!dynamicText) return;
-
-    if (isDeleting) {
-        dynamicText.textContent = current.substring(0, charIndex - 1);
-        charIndex--;
-    } else {
-        dynamicText.textContent = current.substring(0, charIndex + 1);
-        charIndex++;
-    }
-
-    if (!isDeleting && charIndex === current.length) {
-        isDeleting = true;
-        setTimeout(typeEffect, pauseEnd);
-        return;
-    }
-
-    if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        setTimeout(typeEffect, 500);
-        return;
-    }
-
-    setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);
-}
-
-typeEffect();
+    const name = this.name.value;
+    const email = this.email.value;
+    const message = this.message.value;
+    
+    emailjs.send("service_zzz5r4r", "template_lib4c04", {
+        name: name,
+        email: email,
+        message: message,
+        time: new Date().toLocaleString()
+    }).then(
+        function(response) {
+            alert("Message sent successfully!");
+            contactForm.reset();
+        },
+        function(error) {
+            alert("Failed to send message. Please try again.");
+        }
+    );
+});
 
 // Navbar background change on scroll
 const navbar = document.querySelector('.navbar');
