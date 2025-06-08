@@ -22,11 +22,8 @@ themeToggle.addEventListener('change', function() {
 });
 
 // Custom cursor
-const cursor = document.querySelector('.cursor');
-document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-});
+const cursor = document.querySelector(".cursor-dot");
+const cursorOutline = document.querySelector(".cursor-dot-outline");
 
 // Cursor hover effect
 document.querySelectorAll('a, button').forEach(link => {

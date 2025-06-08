@@ -669,4 +669,108 @@ footer {
 
 [data-theme="dark"] .line {
     box-shadow: 0 0 10px var(--primary-color);
+}
+
+/* Remove cursor dot only */
+.cursor-dot,
+.cursor-dot-outline {
+    display: none;
+    pointer-events: none;
+}
+
+/* Custom cursor styles for links and interactive elements */
+a, 
+button,
+.btn,
+.nav-link,
+.social-link {
+    cursor: pointer;
+}
+
+a:hover, 
+button:hover,
+.btn:hover,
+.nav-link:hover,
+.social-link:hover {
+    cursor: pointer;
+    /* Add a subtle transition for smooth color change */
+    transition: color 0.3s ease;
+    color: var(--primary-color);
+}
+
+/* Interactive elements hover effects */
+a, 
+.nav-link,
+.btn,
+.social-icon,
+button {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Hover effect for navigation links */
+.nav-link:hover {
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* Hover effect for buttons */
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover effect for social icons */
+.social-icon:hover {
+    color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+/* General link hover effect */
+a:not(.btn):not(.nav-link):not(.social-icon):hover {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+/* Remove cursor dot */
+.cursor-dot,
+.cursor-dot-outline {
+    display: none;
+    pointer-events: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn.primary {
+    background: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn.secondary {
+    background: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn.primary:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn.secondary:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-3px);
 } 
