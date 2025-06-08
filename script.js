@@ -3,73 +3,55 @@
     emailjs.init("XlLRzHIK9Uww0lIoF");
 })();
 
-// Particles.js Configuration
-particlesJS("particles-js", {
-    particles: {
-        number: {
-            value: 80,
-            density: {
-                enable: true,
-                value_area: 800
-            }
-        },
-        color: {
-            value: "#6366f1"
-        },
-        shape: {
-            type: "circle"
-        },
-        opacity: {
-            value: 0.5,
-            random: false
-        },
-        size: {
-            value: 3,
-            random: true
-        },
-        line_linked: {
-            enable: true,
-            distance: 150,
-            color: "#6366f1",
-            opacity: 0.4,
-            width: 1
-        },
-        move: {
-            enable: true,
-            speed: 2,
-            direction: "none",
-            random: false,
-            straight: false,
-            out_mode: "out",
-            bounce: false
-        }
-    },
-    interactivity: {
-        detect_on: "canvas",
-        events: {
-            onhover: {
-                enable: true,
-                mode: "grab"
-            },
-            onclick: {
-                enable: true,
-                mode: "push"
-            },
-            resize: true
-        },
-        modes: {
-            grab: {
-                distance: 140,
-                line_linked: {
-                    opacity: 1
-                }
-            },
-            push: {
-                particles_nb: 4
-            }
-        }
-    },
-    retina_detect: true
+// Custom Cursor
+const cursor = document.querySelector('.cursor');
+const cursorFollower = document.querySelector('.cursor-follower');
+let mouseX = 0, mouseY = 0;
+let cursorX = 0, cursorY = 0;
+let followerX = 0, followerY = 0;
+
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
+
+function updateCursor() {
+    const diffX = mouseX - cursorX;
+    const diffY = mouseY - cursorY;
+    
+    cursorX += diffX * 0.2;
+    cursorY += diffY * 0.2;
+    cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+    
+    followerX += (mouseX - followerX) * 0.1;
+    followerY += (mouseY - followerY) * 0.1;
+    cursorFollower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0)`;
+    
+    requestAnimationFrame(updateCursor);
+}
+
+updateCursor();
+
+// Cursor interactions
+const links = document.querySelectorAll('a, button');
+links.forEach(link => {
+    link.addEventListener('mouseenter', () => {
+        cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) scale(1.5)`;
+        cursorFollower.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) scale(2)`;
+    });
+    
+    link.addEventListener('mouseleave', () => {
+        cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) scale(1)`;
+        cursorFollower.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) scale(1)`;
+    });
+});
+
+// Initialize Vanilla Tilt
+VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+    max: 15,
+    speed: 400,
+    glare: true,
+    "max-glare": 0.2,
 });
 
 // Typing Animation
@@ -124,6 +106,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             });
             this.classList.add('active');
         }
+    });
+});
+
+// Parallax effect on scroll
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const parallaxElements = document.querySelectorAll('[data-tilt]');
+    
+    parallaxElements.forEach(element => {
+        const speed = 0.15;
+        const yPos = -(scrolled * speed);
+        element.style.transform = `translate3d(0, ${yPos}px, 0)`;
     });
 });
 

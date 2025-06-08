@@ -6,211 +6,258 @@
     <title>Sai Udawant - Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="particles-js"></div>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
     
-    <nav class="navbar glass">
-        <div class="nav-logo">S</div>
-        <div class="nav-links">
-            <a href="#home" class="active">Home</a>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </div>
-        <div class="theme-toggle">
-            <input type="checkbox" id="theme-switch">
-            <label for="theme-switch" class="toggle-label">
-                <i class="fas fa-sun"></i>
-                <i class="fas fa-moon"></i>
-            </label>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <div class="logo-3d">S</div>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="active">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="theme-toggle">
+                <input type="checkbox" id="theme-switch">
+                <label for="theme-switch" class="toggle-label">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </label>
+            </div>
         </div>
     </nav>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="gradient-text">Sai Udawant</h1>
-                <div class="typewriter">
-                    <span class="typed-text"></span>
-                    <span class="cursor"></span>
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="title-line">Hi, I'm</span>
+                        <span class="title-main">Sai Udawant</span>
+                        <span class="title-sub typed-text"></span>
+                    </h1>
+                    <p class="hero-description">Transforming ideas into reality through innovative technology solutions</p>
+                    <div class="cta-container">
+                        <a href="#projects" class="cta-button primary">
+                            <span class="button-content">View Projects</span>
+                            <div class="button-reflection"></div>
+                        </a>
+                        <a href="assets/Sai_Resume.pdf" class="cta-button secondary" download>
+                            <span class="button-content">
+                                <i class="fas fa-download"></i>
+                                Download CV
+                            </span>
+                            <div class="button-reflection"></div>
+                        </a>
+                    </div>
                 </div>
-                <p class="hero-description">Crafting innovative solutions through code and creativity</p>
-                <div class="cta-container">
-                    <a href="#projects" class="cta-button primary">View Projects</a>
-                    <a href="assets/Sai_Resume.pdf" class="cta-button secondary" download>
-                        <i class="fas fa-download"></i> Download CV
-                    </a>
+                <div class="hero-visual">
+                    <div class="cube-container">
+                        <div class="cube">
+                            <div class="cube-face front"><i class="fas fa-code"></i></div>
+                            <div class="cube-face back"><i class="fas fa-microchip"></i></div>
+                            <div class="cube-face right"><i class="fas fa-server"></i></div>
+                            <div class="cube-face left"><i class="fas fa-mobile-alt"></i></div>
+                            <div class="cube-face top"><i class="fas fa-database"></i></div>
+                            <div class="cube-face bottom"><i class="fas fa-cloud"></i></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="floating-shapes">
-                    <div class="shape shape1"></div>
-                    <div class="shape shape2"></div>
-                    <div class="shape shape3"></div>
-                </div>
+            <div class="scroll-indicator">
+                <div class="scroll-text">Scroll Down</div>
+                <div class="scroll-line"></div>
             </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="mouse">
-                <div class="wheel"></div>
-            </div>
-            <div class="arrows">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="about" class="about">
-        <div class="section-header">
-            <h2 class="gradient-text">About Me</h2>
-            <div class="section-line"></div>
-        </div>
-        <div class="about-container glass">
-            <div class="about-content">
-                <p>I am a passionate IoT Developer and Full Stack Engineer with a keen interest in creating innovative solutions. My expertise lies in developing efficient and user-friendly applications that solve real-world problems.</p>
-                <div class="skills-container">
-                    <h3>Technical Expertise</h3>
+        <section id="about" class="about">
+            <div class="section-header">
+                <h2>About Me</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>I am a passionate IoT Developer and Full Stack Engineer with a keen interest in creating innovative solutions. My expertise lies in developing efficient and user-friendly applications that solve real-world problems.</p>
+                    </div>
                     <div class="skills-grid">
-                        <div class="skill-card glass">
-                            <i class="fas fa-microchip"></i>
-                            <h4>IoT Development</h4>
-                            <p>ESP32, Arduino, Sensors</p>
+                        <div class="skill-card" data-tilt>
+                            <div class="skill-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <h3>IoT Development</h3>
+                            <ul class="skill-list">
+                                <li>ESP32</li>
+                                <li>Arduino</li>
+                                <li>Sensors & Actuators</li>
+                                <li>PCB Design</li>
+                            </ul>
                         </div>
-                        <div class="skill-card glass">
-                            <i class="fas fa-code"></i>
-                            <h4>Full Stack</h4>
-                            <p>React, Node.js, MongoDB</p>
+                        <div class="skill-card" data-tilt>
+                            <div class="skill-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h3>Full Stack</h3>
+                            <ul class="skill-list">
+                                <li>React.js</li>
+                                <li>Node.js</li>
+                                <li>MongoDB</li>
+                                <li>RESTful APIs</li>
+                            </ul>
                         </div>
-                        <div class="skill-card glass">
-                            <i class="fas fa-cloud"></i>
-                            <h4>Cloud Services</h4>
-                            <p>AWS, Azure, Docker</p>
+                        <div class="skill-card" data-tilt>
+                            <div class="skill-icon">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <h3>Cloud Services</h3>
+                            <ul class="skill-list">
+                                <li>AWS</li>
+                                <li>Azure IoT</li>
+                                <li>Docker</li>
+                                <li>CI/CD</li>
+                            </ul>
                         </div>
-                        <div class="skill-card glass">
-                            <i class="fas fa-mobile-alt"></i>
-                            <h4>App Development</h4>
-                            <p>React Native, Flutter</p>
+                        <div class="skill-card" data-tilt>
+                            <div class="skill-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3>App Development</h3>
+                            <ul class="skill-list">
+                                <li>React Native</li>
+                                <li>Flutter</li>
+                                <li>Native Android</li>
+                                <li>Cross-platform</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="projects" class="projects">
-        <div class="section-header">
-            <h2 class="gradient-text">Featured Projects</h2>
-            <div class="section-line"></div>
-        </div>
-        <div class="projects-grid">
-            <div class="project-card glass">
-                <div class="project-content">
-                    <div class="project-header">
-                        <i class="fas fa-fingerprint project-icon"></i>
+        <section id="projects" class="projects">
+            <div class="section-header">
+                <h2>Featured Projects</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card" data-tilt>
+                    <div class="project-content">
+                        <div class="project-icon">
+                            <i class="fas fa-fingerprint"></i>
+                        </div>
                         <h3>Biometric Bike Security</h3>
+                        <p>Advanced security system using fingerprint authentication for bike ignition control.</p>
+                        <div class="project-tech">
+                            <span>Arduino</span>
+                            <span>ESP32</span>
+                            <span>GT511C3</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <span>View Demo</span>
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="project-link">
+                                <span>Source Code</span>
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
                     </div>
-                    <p>Advanced security system using fingerprint authentication for bike ignition control.</p>
-                    <div class="tech-stack">
-                        <span>Arduino</span>
-                        <span>ESP32</span>
-                        <span>GT511C3</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link">
-                            <i class="fas fa-external-link-alt"></i>
-                            Demo
-                        </a>
-                        <a href="#" class="project-link">
-                            <i class="fab fa-github"></i>
-                            Code
-                        </a>
-                    </div>
+                    <div class="project-bg"></div>
                 </div>
-            </div>
 
-            <div class="project-card glass">
-                <div class="project-content">
-                    <div class="project-header">
-                        <i class="fas fa-solar-panel project-icon"></i>
+                <div class="project-card" data-tilt>
+                    <div class="project-content">
+                        <div class="project-icon">
+                            <i class="fas fa-solar-panel"></i>
+                        </div>
                         <h3>Smart Solar Tracker</h3>
+                        <p>Dual-axis solar tracking system with real-time monitoring and optimization.</p>
+                        <div class="project-tech">
+                            <span>ESP32</span>
+                            <span>IoT</span>
+                            <span>Sensors</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <span>View Demo</span>
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="project-link">
+                                <span>Source Code</span>
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
                     </div>
-                    <p>Dual-axis solar tracking system with real-time monitoring and optimization.</p>
-                    <div class="tech-stack">
-                        <span>ESP32</span>
-                        <span>IoT</span>
-                        <span>Sensors</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link">
-                            <i class="fas fa-external-link-alt"></i>
-                            Demo
-                        </a>
-                        <a href="#" class="project-link">
-                            <i class="fab fa-github"></i>
-                            Code
-                        </a>
-                    </div>
+                    <div class="project-bg"></div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="contact" class="contact">
-        <div class="section-header">
-            <h2 class="gradient-text">Get in Touch</h2>
-            <div class="section-line"></div>
-        </div>
-        <div class="contact-container">
-            <div class="contact-info glass">
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <a href="mailto:saiudawant2@gmail.com">saiudawant2@gmail.com</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <a href="tel:+918010286599">+91 8010286599</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Kopargaon, Maharashtra</span>
-                    </div>
-                </div>
-                <div class="social-links">
-                    <a href="https://github.com/SaiUdawant" target="_blank" class="social-link">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/sai-udawant" target="_blank" class="social-link">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                </div>
+        <section id="contact" class="contact">
+            <div class="section-header">
+                <h2>Get in Touch</h2>
+                <div class="section-line"></div>
             </div>
-            <form id="contact-form" class="contact-form glass">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
+            <div class="contact-container">
+                <div class="contact-info" data-tilt>
+                    <div class="contact-card">
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:saiudawant2@gmail.com">saiudawant2@gmail.com</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="tel:+918010286599">+91 8010286599</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Kopargaon, Maharashtra</span>
+                            </div>
+                        </div>
+                        <div class="social-links">
+                            <a href="https://github.com/SaiUdawant" target="_blank" class="social-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/sai-udawant" target="_blank" class="social-link">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-                <button type="submit" class="cta-button primary">
-                    <i class="fas fa-paper-plane"></i>
-                    Send Message
-                </button>
-            </form>
-        </div>
-    </section>
+                <form id="contact-form" class="contact-form" data-tilt>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button primary">
+                        <span class="button-content">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </span>
+                        <div class="button-reflection"></div>
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
 
-    <footer class="footer glass">
+    <footer class="footer">
         <div class="footer-content">
             <p>&copy; 2024 Sai Udawant. All rights reserved.</p>
             <div class="footer-links">
@@ -222,7 +269,7 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
     <script src="script.js"></script>
