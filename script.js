@@ -158,10 +158,18 @@ document.getElementById('contact-form').addEventListener('submit', function(even
     document.getElementById('success-message').style.display = 'none';
     document.getElementById('error-message').style.display = 'none';
 
-    console.log('Attempting to send email...');
+    // Get the form data
+    const templateParams = {
+        from_name: document.getElementById('from_name').value,
+        reply_to: document.getElementById('from_email').value,
+        message: document.getElementById('message').value,
+        to_name: 'Sai Udawant'
+    };
+
+    console.log('Attempting to send email with params:', templateParams);
 
     // Send the email using EmailJS
-    emailjs.sendForm('service_zzz5r4r', 'template_lib4c04', this)
+    emailjs.send('service_zzz5r4r', 'template_lib4c04', templateParams)
         .then(function(response) {
             console.log('SUCCESS!', response.status, response.text);
             // Show success message
