@@ -3,27 +3,85 @@
     emailjs.init("XlLRzHIK9Uww0lIoF");
 })();
 
-// Theme switching functionality
+// Theme Toggle
 const themeToggle = document.getElementById('theme-toggle');
-const htmlElement = document.documentElement;
+const body = document.body;
 
-// Check for saved theme preference, otherwise use system preference
+// Check for saved theme preference
 const savedTheme = localStorage.getItem('theme');
-const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-if (savedTheme) {
-    htmlElement.setAttribute('data-theme', savedTheme);
-    themeToggle.checked = savedTheme === 'dark';
-} else {
-    htmlElement.setAttribute('data-theme', systemPrefersDark ? 'dark' : 'light');
-    themeToggle.checked = systemPrefersDark;
+if (savedTheme === 'dark') {
+    body.classList.add('dark-theme');
+    themeToggle.checked = true;
 }
 
-// Theme toggle event listener
-themeToggle.addEventListener('change', function() {
-    const newTheme = this.checked ? 'dark' : 'light';
-    htmlElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
+// Theme toggle handler
+themeToggle.addEventListener('change', () => {
+    if (themeToggle.checked) {
+        body.classList.add('dark-theme');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        body.classList.remove('dark-theme');
+        localStorage.setItem('theme', 'light');
+    }
+});
+
+// Smooth scroll for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Active navigation link highlight
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= sectionTop - 60) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) {
+            link.classList.add('active');
+        }
+    });
+});
+
+// Contact Form Handling
+const contactForm = document.getElementById('contact-form');
+
+contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const formData = {
+        name: this.name.value,
+        email: this.email.value,
+        message: this.message.value,
+        time: new Date().toLocaleString()
+    };
+
+    emailjs.send('service_zzz5r4r', 'template_lib4c04', formData)
+        .then(function(response) {
+            alert('Message sent successfully!');
+            contactForm.reset();
+        }, function(error) {
+            alert('Failed to send message. Please try again.');
+            console.error('EmailJS error:', error);
+        });
 });
 
 // Typing animation
@@ -66,20 +124,6 @@ function typeEffect() {
 }
 
 typeEffect();
-
-// Smooth scrolling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
 
 // Navbar background change on scroll
 const navbar = document.querySelector('.navbar');
@@ -142,53 +186,6 @@ const observer = new IntersectionObserver((entries) => {
 // Observe elements for animation
 document.querySelectorAll('.work-card, .skill-category, .timeline-item').forEach(el => {
     observer.observe(el);
-});
-
-// Contact Form Handling
-document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    // Show loading state
-    const submitButton = this.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton.textContent;
-    submitButton.textContent = 'Sending...';
-    submitButton.disabled = true;
-
-    // Hide any existing messages
-    document.getElementById('success-message').style.display = 'none';
-    document.getElementById('error-message').style.display = 'none';
-
-    // Get the form data
-    const templateParams = {
-        name: document.getElementById('from_name').value,
-        time: new Date().toLocaleString(),
-        message: document.getElementById('message').value,
-        email: document.getElementById('from_email').value
-    };
-
-    console.log('Attempting to send email with params:', templateParams);
-
-    // Send the email using EmailJS
-    emailjs.send('service_zzz5r4r', 'template_lib4c04', templateParams)
-        .then(function(response) {
-            console.log('SUCCESS!', response.status, response.text);
-            // Show success message
-            document.getElementById('success-message').style.display = 'block';
-            // Reset the form
-            document.getElementById('contact-form').reset();
-        })
-        .catch(function(error) {
-            console.error('FAILED...', error);
-            // Show error message with details
-            const errorMessage = document.getElementById('error-message');
-            errorMessage.textContent = 'Failed to send message: ' + (error.text || 'Please try again.');
-            errorMessage.style.display = 'block';
-        })
-        .finally(function() {
-            // Reset button state
-            submitButton.textContent = originalButtonText;
-            submitButton.disabled = false;
-        });
 });
 
 // Parallax effect for shapes
