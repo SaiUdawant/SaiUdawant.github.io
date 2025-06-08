@@ -160,35 +160,38 @@ document.getElementById('contact-form').addEventListener('submit', function(even
 
     // Get the form data
     const templateParams = {
-        to_name: 'Sai Udawant',
-        from_name: document.getElementById('from_name').value,
-        from_email: document.getElementById('from_email').value,
-        message: document.getElementById('message').value,
-        reply_to: document.getElementById('from_email').value
+        name: document.getElementById('from_name').value,
+        email: document.getElementById('from_email').value,
+        message: document.getElementById('message').value
     };
 
     console.log('Attempting to send email with params:', templateParams);
 
     // Send the email using EmailJS
-    emailjs.sendForm('service_zzz5r4r', 'template_vlwj6ue', event.target)
-        .then(function(response) {
-            console.log('SUCCESS!', response.status, response.text);
-            // Show success message
-            document.getElementById('success-message').style.display = 'block';
-            // Reset the form
-            document.getElementById('contact-form').reset();
-        }, function(error) {
-            console.error('FAILED...', error);
-            // Show error message with details
-            const errorMessage = document.getElementById('error-message');
-            errorMessage.textContent = 'Failed to send message: ' + (error.text || 'Please try again.');
-            errorMessage.style.display = 'block';
-        })
-        .finally(function() {
-            // Reset button state
-            submitButton.textContent = originalButtonText;
-            submitButton.disabled = false;
-        });
+    emailjs.send(
+        'service_zzz5r4r',
+        'template_vlwj6ue',
+        templateParams
+    )
+    .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
+        // Show success message
+        document.getElementById('success-message').style.display = 'block';
+        // Reset the form
+        document.getElementById('contact-form').reset();
+    })
+    .catch(function(error) {
+        console.error('FAILED...', error);
+        // Show error message with details
+        const errorMessage = document.getElementById('error-message');
+        errorMessage.textContent = 'Failed to send message: ' + (error.text || 'Please try again.');
+        errorMessage.style.display = 'block';
+    })
+    .finally(function() {
+        // Reset button state
+        submitButton.textContent = originalButtonText;
+        submitButton.disabled = false;
+    });
 });
 
 // Parallax effect for shapes
